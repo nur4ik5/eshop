@@ -1,5 +1,10 @@
 from django.db import models
 
+def product_photo_dir(instance, filename):
+	# MEDIA_ROOT/ ID_/_FILENAME_
+	return 'porduct_photos/'+instance.id + '/' + filename
+
+
 class Product(models.Model):
 	# Модель товаров
 	SPORT = 'sport'
@@ -24,10 +29,13 @@ class Product(models.Model):
 	count = models.IntegerField(verbose_name='Количество на складе')
 	featured_product = models.BooleanField(default=False, verbose_name='Продвигать товар')
 	category = models.CharField(max_length=5, choices=CATEGORIES, default=PHONE, verbose_name='Котегория')	
+	# поле для сохранения картинки, аргумент upload_to для обозначения конкретной папки
+	photo = models.ImageField(upload_to='porduct_photos', default='default.png')
+
 
 	def __str__(self):
 		return f"{self.name} - {self.category}"
 
 	class Meta:
 		verbose_name='Товар'
-		verbose_name_plural='Товары'
+		verbose_name_plural='Товар'
