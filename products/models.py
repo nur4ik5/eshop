@@ -31,7 +31,7 @@ class Product(models.Model):
 	category = models.CharField(max_length=5, choices=CATEGORIES, default=PHONE, verbose_name='Котегория')	
 	# поле для сохранения картинки, аргумент upload_to для обозначения конкретной папки
 	photo = models.ImageField(upload_to='porduct_photos', default='default.png')
-
+	# Positive
 
 	def __str__(self):
 		return f"{self.name} - {self.category}"
